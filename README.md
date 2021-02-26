@@ -1,6 +1,6 @@
 # roking-auto-a11y
 
-The **roking-auto-a11y** module combines puppeteer and the aXe accessibility testing engine to test accessibility after page interactions. This addresses the hidden issue in accessibility testing where dynamic content behind interactions, such as accordions, dialog boxes, tooltips, and menus, is left unevaluated.
+The **roking-auto-a11y** module combines **puppeteer** and the aXe accessibility testing engine, **axe-core**, to test accessibility after page interactions. This addresses the hidden issue in accessibility testing where dynamic content behind interactions, such as accordions, dialog boxes, tooltips, and menus, is left unevaluated.
 
 In order to use this, a test must be written that will perform the interactions on a page. An example of such a test is available in the _click_ test in the examples collection.
 
