@@ -8,7 +8,7 @@ let page;
 
 launch({
   height: 1080,
-  url: 'http://localhost:4000',
+  url: 'https://hrobertking.github.io/thinking-about-web-accessibility/date.htm',
   width: 1920,
 })
   .then((response) => {
