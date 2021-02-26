@@ -1,7 +1,7 @@
 const {
   click,
   launch,
-} = require('../src');
+} = require('../src/puppeteer');
 
 let browser;
 let page;
