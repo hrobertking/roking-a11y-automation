@@ -80,10 +80,12 @@ let Violations = [];
  * @param {String} path
  */
 const gblMkDir = (path) => {
-  const dir = PATH.dirname(path);
+  if (path) {
+    const dir = PATH.dirname(path);
 
-  if (!FS.existsSync(dir)) {
-    FS.mkdirSync(dir, { recursive: true });
+    if (!FS.existsSync(dir)) {
+      FS.mkdirSync(dir, { recursive: true });
+    }
   }
 };
 /**
@@ -621,8 +623,12 @@ const launch = async (config = {}) => {
     Harness.throws = throws;
     Harness.verbose = verbose;
 
+    // make sure the results file is ready
     if (FS.existsSync(Harness.save)) {
       FS.unlinkSync(Harness.save);
+    }
+    if (Harness.save) {
+      gblMkDir(Harness.save);
     }
 
     Harness.browser = await puppeteer.launch({ product: 'chrome' });

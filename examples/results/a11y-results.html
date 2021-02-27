@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluation Results</title>
+<style type="text/css">
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+tbody tr:nth-of-type(odd) {
+  background-color: #efefef;
+}
+tbody td:nth-of-type(n+2) {
+  text-align: center;
+}
+tbody td.impact {
+  text-align: left;
+  white-space: nowrap;
+}
+td, th {
+  padding: 0.25em;
+  vertical-align: top;
+}
+th:first-of-type {
+  text-align: left;
+}
+.flex {
+  align-items: center;
+  display: inline-flex;
+}
+.icon {
+  cursor: default;
+  display: inline-block;
+  font-size: 1.5em;
+  margin-right: 0.25em;
+  text-align: center;
+  user-select: none;
+  width: 1em;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Rule</th>
+      <th scope="col">Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a target="_blank" href="https://dequeuniversity.com/rules/axe/4.1/color-contrast?application=axe-puppeteer">
+          Elements must have sufficient color contrast
+        </a>
+
+        <div>
+          <p>
+            <em>Fix any of the following</em>
+          </p>
+          <ul>
+            <li>
+              Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1
+              
+              <div>
+                <em>Related Nodes</em>:
+                <ul>
+                  <li>
+                    #always-fail
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          
+        </div>
+      </td>
+      <td class="impact">
+        <span class="flex">
+          <span aria-hidden="true" class="icon">
+            ⚠
+          </span>
+          <span>serious</span>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
