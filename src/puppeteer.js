@@ -13,7 +13,7 @@ const { prettyPrintHtml } = require('./utils');
  * @property {Object} options - An object passed through a puppeteer action
  * @property {String} options.button - One of 'left', 'middle', 'right'; defaults to 'left'.
  * @property {Number} options.clickCount - Defaults to 1.
- * @property {Number} options.delay - Milliseconds to wait between mousedown and mouseup or keypresses; defaults to 0.
+ * @property {Number} options.delay - Milliseconds to wait in action; defaults to 0.
  * @property {String[]} keys - An object passed through a puppeteer action
  * @property {String} target - The selector of the action target
  * @property {String|String[]} value - An object passed through a puppeteer action
@@ -361,6 +361,7 @@ const analyze = async (action, override) => {
         incomplete: incomplete.reduce((acc, val) => acc + val.nodes.length, 0),
         passes: passes.reduce((acc, val) => acc + val.nodes.length, 0),
         testEngine,
+        testEnvironment,
         timestamp,
         url,
         violations: violations.reduce((acc, val) => acc + val.nodes.length, 0),
@@ -416,8 +417,7 @@ const blur = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.$eval(selector, (evt) => evt.blur())
+    .then(() => Harness.page.$eval(selector, (evt) => evt.blur())
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -433,8 +433,8 @@ const blur = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not blur on ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });
@@ -457,8 +457,7 @@ const click = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.click(selector, options)
+    .then(() => Harness.page.click(selector, options)
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -474,8 +473,8 @@ const click = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not click on ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });
@@ -497,8 +496,7 @@ const focus = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.focus(selector)
+    .then(() => Harness.page.focus(selector)
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -514,8 +512,8 @@ const focus = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not focus on ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });
@@ -540,8 +538,7 @@ const hover = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.hover(selector)
+    .then(() => Harness.page.hover(selector)
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -557,8 +554,8 @@ const hover = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not hover on ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });
@@ -667,8 +664,7 @@ const select = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.select(selector, value)
+    .then(() => Harness.page.select(selector, value)
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -684,8 +680,8 @@ const select = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not select ${value} in ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });
@@ -709,8 +705,7 @@ const sendKeys = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => {
-      return Harness.page.type(selector, keys, options)
+    .then(() => Harness.page.type(selector, keys, options)
         .then(async () => {
           if (waitSelector) {
             await Harness.page.waitForSelector(waitSelector, waitOptions)
@@ -726,8 +721,8 @@ const sendKeys = async (action) => {
         })
         .catch((error) => {
           console.log(`Could not type ${keys} in ${selector}:\n${error}`);
-        });
-    })
+        })
+    )
     .catch(() => {
       console.log(`Could not find ${selector}`);
     });

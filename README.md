@@ -30,111 +30,51 @@ running web server instance. Examples are using `http://localhost:4000` by defau
 7. **[verbose](examples/verbose.js)**: demonstrates how to output verbose violations returned by axe.analyze. `node example/verbose.js`
 
 ### Output
-There are three output modes, with multiple possible destinations. The _default_ mode provides the name of the test that has failed, e.g., "Elements must have sufficient color contrast", the impact of the rule, i.e., MINOR, MODERATE, SERIOUS, or CRITICAL, and the element or elements failing the test. The _quiet_ mode suppresses the list of elements violating the rule, and the _verbose_ mode provides all information available in the axe violations array. 
+There are three output modes, with multiple possible destinations. The _default_ mode provides the name of the test that has failed, e.g., "Elements must have sufficient color contrast", the impact of the rule, i.e., MINOR, MODERATE, SERIOUS, or CRITICAL, and the element or elements failing the test. The _quiet_ mode suppresses the list of elements violating the rule, and the _verbose_ mode provides all information available in the axe violations array.
+
+All samples provided below include _metadata_ provided by the `summary` configuration.
 
 #### Default (Sample)
 ```
-IDs used in ARIA and labels must be unique: CRITICAL
+{"action":{"action":"load","target":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html"},"inapplicable":0,"incomplete":0,"passes":38,"testEngine":{"name":"axe-core","version":"4.1.2"},"testEnvironment":{"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4298.0 Safari/537.36","windowWidth":1920,"windowHeight":1080,"orientationAngle":0,"orientationType":"portrait-primary"},"timestamp":"2021-02-27T16:21:12.022Z","url":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html","violations":1}
 
-<button id="productDetails" type="button" aria-controls="productDetails-panel" aria-expanded="false" aria-selected="false" role="tab" class="sc-AxiKw bOsObG">Widget Description</button>
-<section aria-hidden="true" aria-labelledby="productDetails" aria-live="assertive" id="productDetails-panel" role="tabpanel" class="sc-AxheI ctLWiD">
----------------------------------------
 
 Elements must have sufficient color contrast: SERIOUS
 
-<button type="button" class="css-1yj01zq-Button">
-<a href="https://hrobertking.github.io/thinking-about-web-accessibility/">Thinking About Web Accessibility Component Library</a>
-<button type="button" class="css-1rge0qn-Button">Button Widget</button>
-<button id="btnNext" type="button" class="css-1dzhfgi-Button">Next</button>
----------------------------------------
+<p>This block is visible and will fail SC 1.4.3.</p>
 
-IDs of active elements must be unique: SERIOUS
 
-<button id="btnNext" type="button" class="css-1dzhfgi-Button">Next</button>
----------------------------------------
+=======================================
 
-Document must not have more than one banner landmark: MODERATE
 
-<div role="banner" class="sc-AxjAm hsGjkg">
-```
 
-#### Quiet
-```
-IDs used in ARIA and labels must be unique: CRITICAL
+{"action":{"action":"click","target":"#toggle-button"},"inapplicable":0,"incomplete":0,"passes":42,"testEngine":{"name":"axe-core","version":"4.1.2"},"testEnvironment":{"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4298.0 Safari/537.36","windowWidth":1920,"windowHeight":1080,"orientationAngle":0,"orientationType":"portrait-primary"},"timestamp":"2021-02-27T16:21:12.343Z","url":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html","violations":2}
+
+
 Elements must have sufficient color contrast: SERIOUS
-IDs of active elements must be unique: SERIOUS
-Document must not have more than one banner landmark: MODERATE
+
+<p>This block is visible and will fail SC 1.4.3.</p>
+<p>This block toggles between visible and invisible and should pass when invisible and fail when visible.
+      </p>
+
+
+=======================================
+
 ```
 
-#### Verbose
+#### Quiet (Sample)
 ```
+{"action":{"action":"load","target":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html"},"inapplicable":0,"incomplete":0,"passes":38,"testEngine":{"name":"axe-core","version":"4.1.2"},"testEnvironment":{"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4298.0 Safari/537.36","windowWidth":1920,"windowHeight":1080,"orientationAngle":0,"orientationType":"portrait-primary"},"timestamp":"2021-02-27T16:17:28.687Z","url":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html","violations":1}
+
+Elements must have sufficient color contrast: SERIOUS
+```
+
+#### Verbose (Sample)
+```
+{"action":{"action":"load","target":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html"},"inapplicable":0,"incomplete":0,"passes":38,"testEngine":{"name":"axe-core","version":"4.1.2"},"testEnvironment":{"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4298.0 Safari/537.36","windowWidth":1920,"windowHeight":1080,"orientationAngle":0,"orientationType":"portrait-primary"},"timestamp":"2021-02-27T16:23:34.185Z","url":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html","violations":1}
+
+
 [
-  {
-    "id": "duplicate-id-aria",
-    "impact": "critical",
-    "tags": [
-      "cat.parsing",
-      "wcag2a",
-      "wcag411"
-    ],
-    "description": "Ensures every id attribute value used in ARIA and in labels is unique",
-    "help": "IDs used in ARIA and labels must be unique",
-    "helpUrl": "https://dequeuniversity.com/rules/axe/3.5/duplicate-id-aria?application=axe-puppeteer",
-    "nodes": [
-      {
-        "any": [
-          {
-            "id": "duplicate-id-aria",
-            "data": "productDetails",
-            "relatedNodes": [
-              {
-                "html": "<button id=\"productDetails\" type=\"button\" aria-controls=\"productDetails-panel\" aria-expanded=\"false\" aria-selected=\"false\" role=\"tab\" class=\"sc-AxiKw bOsObG\">Widget Description</button>",
-                "target": [
-                  ".sc-AxjAm.hsGjkg[role=\"banner\"] > .sc-AxhUy.egKGpI > .sc-AxgMl.YefSN[role=\"tablist\"] > .sc-AxiKw.bOsObG[aria-controls=\"productDetails-panel\"]"
-                ]
-              }
-            ],
-            "impact": "critical",
-            "message": "Document has multiple elements referenced with ARIA with the same id attribute: productDetails"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "critical",
-        "html": "<button id=\"productDetails\" type=\"button\" aria-controls=\"productDetails-panel\" aria-expanded=\"false\" aria-selected=\"false\" role=\"tab\" class=\"sc-AxiKw bOsObG\">Widget Description</button>",
-        "target": [
-          ".sc-AxjAm.hsGjkg[role=\"banner\"] > .sc-AxhUy.egKGpI > .sc-AxgMl.YefSN[role=\"tablist\"] > .sc-AxiKw.bOsObG[aria-controls=\"productDetails-panel\"]"
-        ],
-        "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: productDetails"
-      },
-      {
-        "any": [
-          {
-            "id": "duplicate-id-aria",
-            "data": "productDetails-panel",
-            "relatedNodes": [
-              {
-                "html": "<section aria-hidden=\"true\" aria-labelledby=\"productDetails\" aria-live=\"assertive\" id=\"productDetails-panel\" role=\"tabpanel\" class=\"sc-AxheI ctLWiD\">",
-                "target": [
-                  ".sc-AxjAm.hsGjkg[role=\"banner\"] > .sc-AxhUy.egKGpI > div:nth-child(2) > .sc-AxheI.ctLWiD[aria-labelledby=\"productDetails\"]"
-                ]
-              }
-            ],
-            "impact": "critical",
-            "message": "Document has multiple elements referenced with ARIA with the same id attribute: productDetails-panel"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "critical",
-        "html": "<section aria-hidden=\"true\" aria-labelledby=\"productDetails\" aria-live=\"assertive\" id=\"productDetails-panel\" role=\"tabpanel\" class=\"sc-AxheI ctLWiD\">",
-        "target": [
-          ".sc-AxjAm.hsGjkg[role=\"banner\"] > .sc-AxhUy.egKGpI > div:nth-child(2) > .sc-AxheI.ctLWiD[aria-labelledby=\"productDetails\"]"
-        ],
-        "failureSummary": "Fix any of the following:\n  Document has multiple elements referenced with ARIA with the same id attribute: productDetails-panel"
-      }
-    ]
-  },
   {
     "id": "color-contrast",
     "impact": "serious",
@@ -145,234 +85,140 @@ Document must not have more than one banner landmark: MODERATE
     ],
     "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
     "help": "Elements must have sufficient color contrast",
-    "helpUrl": "https://dequeuniversity.com/rules/axe/3.5/color-contrast?application=axe-puppeteer",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.1/color-contrast?application=axe-puppeteer",
     "nodes": [
       {
         "any": [
           {
             "id": "color-contrast",
             "data": {
-              "fgColor": "#006fcf",
-              "bgColor": "#ecedee",
-              "contrastRatio": 4.29,
+              "fgColor": "#cccccc",
+              "bgColor": "#ffffff",
+              "contrastRatio": 1.6,
               "fontSize": "12.0pt (16px)",
               "fontWeight": "normal",
               "expectedContrastRatio": "4.5:1"
             },
             "relatedNodes": [
               {
-                "html": "<div id=\"terms-and-conditions\" class=\"sc-fzplWN sapnn\">",
+                "html": "<div class=\"fail-1-4-3\" id=\"always-fail\">\n        <p>This block is visible and will fail SC 1.4.3.</p>\n      </div>",
                 "target": [
-                  "#terms-and-conditions"
+                  "#always-fail"
                 ]
               }
             ],
             "impact": "serious",
-            "message": "Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+            "message": "Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
           }
         ],
         "all": [],
         "none": [],
         "impact": "serious",
-        "html": "<button type=\"button\" class=\"css-1yj01zq-Button\">",
+        "html": "<p>This block is visible and will fail SC 1.4.3.</p>",
         "target": [
-          ".sc-fzpans.bjqmK > .css-1yj01zq-Button"
+          "#always-fail > p"
         ],
-        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-      },
-      {
-        "any": [
-          {
-            "id": "color-contrast",
-            "data": {
-              "fgColor": "#006fcf",
-              "bgColor": "#ecedee",
-              "contrastRatio": 4.29,
-              "fontSize": "11.3pt (15px)",
-              "fontWeight": "normal",
-              "expectedContrastRatio": "4.5:1"
-            },
-            "relatedNodes": [
-              {
-                "html": "<div id=\"terms-and-conditions\" class=\"sc-fzplWN sapnn\">",
-                "target": [
-                  "#terms-and-conditions"
-                ]
-              }
-            ],
-            "impact": "serious",
-            "message": "Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "serious",
-        "html": "<a href=\"https://hrobertking.github.io/thinking-about-web-accessibility/\">Thinking About Web Accessibility</a>",
-        "target": [
-          "a"
-        ],
-        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
-      },
-      {
-        "any": [
-          {
-            "id": "color-contrast",
-            "data": {
-              "fgColor": "#006fcf",
-              "bgColor": "#ecedee",
-              "contrastRatio": 4.29,
-              "fontSize": "12.0pt (16px)",
-              "fontWeight": "normal",
-              "expectedContrastRatio": "4.5:1"
-            },
-            "relatedNodes": [
-              {
-                "html": "<div id=\"terms-and-conditions\" class=\"sc-fzplWN sapnn\">",
-                "target": [
-                  "#terms-and-conditions"
-                ]
-              }
-            ],
-            "impact": "serious",
-            "message": "Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "serious",
-        "html": "<button type=\"button\" class=\"css-1rge0qn-Button\">Button Widget</button>",
-        "target": [
-          "#terms-and-conditions > .sc-fzoLsD.cYRQSO > .css-1rge0qn-Button"
-        ],
-        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.29 (foreground color: #006fcf, background color: #ecedee, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-      },
-      {
-        "any": [
-          {
-            "id": "color-contrast",
-            "data": {
-              "fgColor": "#ebeceb",
-              "bgColor": "#59a0de",
-              "contrastRatio": 2.36,
-              "fontSize": "12.0pt (16px)",
-              "fontWeight": "normal",
-              "expectedContrastRatio": "4.5:1"
-            },
-            "relatedNodes": [
-              {
-                "html": "<button id=\"btnNext\" type=\"button\" class=\"css-1dzhfgi-Button\">Next</button>",
-                "target": [
-                  "#terms-and-conditions > .sc-fzoLsD.cYRQSO > div > .css-1dzhfgi-Button"
-                ]
-              }
-            ],
-            "impact": "serious",
-            "message": "Element has insufficient color contrast of 2.36 (foreground color: #ebeceb, background color: #59a0de, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "serious",
-        "html": "<button id=\"btnNext\" type=\"button\" class=\"css-1dzhfgi-Button\">Next</button>",
-        "target": [
-          "#terms-and-conditions > .sc-fzoLsD.cYRQSO > div > .css-1dzhfgi-Button"
-        ],
-        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.36 (foreground color: #ebeceb, background color: #59a0de, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-      }
-    ]
-  },
-  {
-    "id": "duplicate-id-active",
-    "impact": "serious",
-    "tags": [
-      "cat.parsing",
-      "wcag2a",
-      "wcag411"
-    ],
-    "description": "Ensures every id attribute value of active elements is unique",
-    "help": "IDs of active elements must be unique",
-    "helpUrl": "https://dequeuniversity.com/rules/axe/3.5/duplicate-id-active?application=axe-puppeteer",
-    "nodes": [
-      {
-        "any": [
-          {
-            "id": "duplicate-id-active",
-            "data": "btnNext",
-            "relatedNodes": [
-              {
-                "html": "<button disabled=\"\" id=\"btnNext\" type=\"button\" class=\"css-1dzhfgi-Button\">Next</button>",
-                "target": [
-                  "#terms-and-conditions > .sc-fzoLsD.cYRQSO > div > .css-1dzhfgi-Button"
-                ]
-              },
-              {
-                "html": "<button disabled=\"\" id=\"btnNext\" type=\"button\" class=\"css-1dzhfgi-Button\">Next</button>",
-                "target": [
-                  "#disclosures > .sc-fzoLsD.cYRQSO > div > .css-1dzhfgi-Button"
-                ]
-              }
-            ],
-            "impact": "serious",
-            "message": "Document has active elements with the same id attribute: btnNext"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "serious",
-        "html": "<button id=\"btnNext\" type=\"button\" class=\"css-1dzhfgi-Button\">Next</button>",
-        "target": [
-          "#terms-and-conditions > .sc-fzoLsD.cYRQSO > div > .css-1dzhfgi-Button"
-        ],
-        "failureSummary": "Fix any of the following:\n  Document has active elements with the same id attribute: btnNext"
-      }
-    ]
-  },
-  {
-    "id": "landmark-no-duplicate-banner",
-    "impact": "moderate",
-    "tags": [
-      "cat.semantics",
-      "best-practice"
-    ],
-    "description": "Ensures the document has at most one banner landmark",
-    "help": "Document must not have more than one banner landmark",
-    "helpUrl": "https://dequeuniversity.com/rules/axe/3.5/landmark-no-duplicate-banner?application=axe-puppeteer",
-    "nodes": [
-      {
-        "any": [
-          {
-            "id": "page-no-duplicate-banner",
-            "data": null,
-            "relatedNodes": [
-              {
-                "html": "<div role=\"banner\" class=\"sc-AxjAm hsGjkg\">",
-                "target": [
-                  ".sc-AxjAm.hsGjkg[role=\"banner\"]"
-                ]
-              },
-              {
-                "html": "<div role=\"banner\" class=\"sc-AxjAm hsGjkg\"><div class=\"sc-AxirZ iseSZ\"><img alt=\"\" role=\"none\" src=\"https://hrobertking.github.io/thinking-about-web-accessibility/images/thinking-about-web-accessibility.png\"><div>Thinking About Web Accessibility</div></div></div>",
-                "target": [
-                  "#disclosure > .sc-AxjAm.hsGjkg[role=\"banner\"]"
-                ]
-              }
-            ],
-            "impact": "moderate",
-            "message": "Document has more than one banner landmark"
-          }
-        ],
-        "all": [],
-        "none": [],
-        "impact": "moderate",
-        "html": "<div role=\"banner\" class=\"sc-AxjAm hsGjkg\">",
-        "target": [
-          ".sc-AxjAm.hsGjkg[role=\"banner\"]"
-        ],
-        "failureSummary": "Fix any of the following:\n  Document has more than one banner landmark"
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
       }
     ]
   }
 ]
+
+
+=======================================
+
+
+
+{"action":{"action":"click","target":"#toggle-button"},"inapplicable":0,"incomplete":0,"passes":42,"testEngine":{"name":"axe-core","version":"4.1.2"},"testEnvironment":{"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4298.0 Safari/537.36","windowWidth":1920,"windowHeight":1080,"orientationAngle":0,"orientationType":"portrait-primary"},"timestamp":"2021-02-27T16:23:34.462Z","url":"https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html","violations":2}
+
+
+[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143"
+    ],
+    "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+    "help": "Elements must have sufficient color contrast",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.1/color-contrast?application=axe-puppeteer",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#cccccc",
+              "bgColor": "#ffffff",
+              "contrastRatio": 1.6,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<div class=\"fail-1-4-3\" id=\"always-fail\">\n        <p>This block is visible and will fail SC 1.4.3.</p>\n      </div>",
+                "target": [
+                  "#always-fail"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p>This block is visible and will fail SC 1.4.3.</p>",
+        "target": [
+          "#always-fail > p"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#cccccc",
+              "bgColor": "#ffffff",
+              "contrastRatio": 1.6,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<div aria-hidden=\"false\" class=\"fail-1-4-3\" id=\"test-block\">\n        <p>This block toggles between visible and invisible and should pass when invisible and fail when visible.\n      </p></div>",
+                "target": [
+                  "#test-block"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p>This block toggles between visible and invisible and should pass when invisible and fail when visible.\n      </p>",
+        "target": [
+          "#test-block > p"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.6 (foreground color: #cccccc, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+]
+
+
+=======================================
+
+
 ```
 
 ## API Reference

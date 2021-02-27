@@ -1,11 +1,7 @@
 const {
   analyze,
-  blur,
   click,
   launch,
-  sendKeys,
-  snapshot,
-  target,
 } = require('../src/puppeteer');
 
 let browser;

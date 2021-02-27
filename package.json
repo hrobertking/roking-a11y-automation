@@ -9,7 +9,7 @@
     "url": "https://github.com/hrobertking/roking-auto-a11y.git"
   },
   "scripts": {
-    "lint": "eslint . --ext .js,.jsx,.md --ignore-path .gitignore",
+    "lint": "eslint . --ext .js --ignore-path .gitignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -19,6 +19,8 @@
     "puppeteer-core": "^5.2.1"
   },
   "devDependencies": {
-    "eslint": "^7.8.1"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.8.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
