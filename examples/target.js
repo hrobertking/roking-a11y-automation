@@ -8,22 +8,22 @@ let browser;
 
 launch({
   height: 1080,
-  url: 'https://hrobertking.github.io/thinking-about-web-accessibility/table.htm',
+  summary: true,
+  url: 'https://hrobertking.github.io/thinking-about-web-accessibility/automated-test-example.html',
   width: 1920,
 })
   .then(async (response) => {
     browser = response.browser;
 
     await target({
-      include: '#simple-table',
+      include: '#always-pass',
       exclude: [
-        '#form-elements',
-        '#complex-groups',
-        '#multi-level-headers',
+        '#always-fail',
+        '#test-block',
       ],
     });
 
-    await click({ target: '#airport-code-col' });
+    await click({ target: '#toggle-button' });
   })
   .then(() => browser.close())
   .catch((error) => console.log(error)); // eslint-disable-line no-console
