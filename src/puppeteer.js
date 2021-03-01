@@ -10,6 +10,7 @@ const {
   analyze,
   clipregion,
   harness,
+  html,
   inrange,
   mkdir,
   prettyPrintHtml,
@@ -195,25 +196,6 @@ const hover = async (action) => {
       console.log(`Could not find ${selector}`);
     });
 };
-
-/**
- * @name html
- * @returns {String}
- * @description Returns the violations as an HTML document
- */
-const html = async () => `
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evaluation Results</title>
-</head>
-<body>
-${table()}
-</body>
-</html>
-`;
 
 /**
  * @name launch
