@@ -14,7 +14,6 @@ const {
   inrange,
   mkdir,
   prettyPrintHtml,
-  table,
   target,
 } = require('./utils');
 
@@ -53,23 +52,23 @@ const blur = async (action) => {
   } = waitFor;
 
   return Harness.page.waitForSelector(selector)
-    .then(() => Harness.page.$eval(selector, (evt) => evt.blur())
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'blur', target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'blur', target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not blur on ${selector}:\n${error}`);
-        })
+    .then(() => Harness.page.$eval(selector, (node) => node.blur())
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'blur', target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'blur', target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not blur on ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
@@ -94,22 +93,22 @@ const click = async (action) => {
 
   return Harness.page.waitForSelector(selector)
     .then(() => Harness.page.click(selector, options)
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'click', options, target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'click', options, target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not click on ${selector}:\n${error}`);
-        })
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'click', options, target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'click', options, target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not click on ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
@@ -133,22 +132,22 @@ const focus = async (action) => {
 
   return Harness.page.waitForSelector(selector)
     .then(() => Harness.page.focus(selector)
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'focus', target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'focus', target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not focus on ${selector}:\n${error}`);
-        })
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'focus', target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'focus', target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not focus on ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
@@ -175,22 +174,22 @@ const hover = async (action) => {
 
   return Harness.page.waitForSelector(selector)
     .then(() => Harness.page.hover(selector)
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'hover', target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'hover', target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not hover on ${selector}:\n${error}`);
-        })
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'hover', target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'hover', target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not hover on ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
@@ -294,22 +293,22 @@ const select = async (action) => {
 
   return Harness.page.waitForSelector(selector)
     .then(() => Harness.page.select(selector, value)
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'select', value, target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'select', value, target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not select ${value} in ${selector}:\n${error}`);
-        })
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'select', value, target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'select', value, target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not select ${value} in ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
@@ -335,22 +334,22 @@ const sendKeys = async (action) => {
 
   return Harness.page.waitForSelector(selector)
     .then(() => Harness.page.type(selector, keys, options)
-        .then(async () => {
-          if (waitSelector) {
-            await Harness.page.waitForSelector(waitSelector, waitOptions)
-              .then(async () => {
-                await analyze({ action: 'sendKeys', keys, options, target: selector });
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            await analyze({ action: 'sendKeys', keys, options, target: selector });
-          }
-        })
-        .catch((error) => {
-          console.log(`Could not type ${keys} in ${selector}:\n${error}`);
-        })
+      .then(async () => {
+        if (waitSelector) {
+          await Harness.page.waitForSelector(waitSelector, waitOptions)
+            .then(async () => {
+              await analyze({ action: 'sendKeys', keys, options, target: selector });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          await analyze({ action: 'sendKeys', keys, options, target: selector });
+        }
+      })
+      .catch((error) => {
+        console.log(`Could not type ${keys} in ${selector}:\n${error}`);
+      })
     )
     .catch(() => {
       console.log(`Could not find ${selector}`);
