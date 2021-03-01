@@ -313,6 +313,29 @@ const harness = (Harness) => {
 exports.harness = harness;
 
 /**
+ * @name html
+ * @returns {String}
+ * @description Returns the violations as an HTML document.
+ */
+const html = `<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluation Results</title>
+<style type="text/css">
+${css}
+</style>
+</head>
+<body>
+<h1>Evaluation Results</h1>
+${table()}
+</body>
+</html>
+`;
+exports.html = html;
+
+/**
  * @property icons
  * @type {Enum}
  * @description UTF-8 character used to identify different severities
