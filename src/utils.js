@@ -108,6 +108,80 @@ th:first-of-type {
 }`;
 /**
  * @private
+ * @method doc
+ * @returns {String}
+ * @description Returns HTML table markup for the VIOLATIONS array
+ */
+const doc = () => `
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Rule</th>
+      <th scope="col">Impact</th>
+    </tr>
+  </thead>
+  <tbody>${(VIOLATIONS || []).map((rule) => {
+    const { any = [], all = [] } = rule.nodes.pop() || {};
+
+    return `
+    <tr>
+      <td>
+        <a target="_blank" href="${rule.helpUrl}">
+          ${rule.help.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+        </a>
+
+        <div>${any && any.length > 0 ? `
+          <p>
+            <em>Fix any of the following</em>
+          </p>
+          <ul>${any.map((failure) => `
+            <li>
+              ${failure.message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+              ${failure.relatedNodes.length > 0 ? `
+              <div>
+                <em>Related Nodes</em>:
+                <ul>${failure.relatedNodes.map((node) => `
+                  <li>
+                    ${node.target.join(' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+                  </li>`).join('')}
+                </ul>
+              </div>` : ''}
+            </li>`).join('')}
+          </ul>` : ''}
+          ${all && all.length > 0 ? `
+          <p>
+            <em>Fix all of the following</em>
+          </p>
+          <ul>${all.map((failure) => `
+            <li>
+              ${failure.message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+              ${failure.relatedNodes.length > 0 ? `
+              <div>
+                <em>Related Nodes</em>:
+                <ul>${failure.relatedNodes.map((node) => `
+                  <li>
+                    ${node.target.join(' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+                  </li>`).join('')}
+                </ul>
+              </div>` : ''}
+            </li>`).join('')}
+          </ul>` : ''}
+        </div>
+      </td>
+      <td class="impact">
+        <span class="flex">
+          <span aria-hidden="true" class="icon">
+            ${icons[rule.impact]}
+          </span>
+          <span>${rule.impact}</span>
+        </span>
+      </td>
+    </tr>`;
+  }).join('')}
+  </tbody>
+</table>`;
+/**
+ * @private
  * @method handle
  * @returns {undefined}
  * @param {String} message
@@ -115,7 +189,7 @@ th:first-of-type {
  *   according to Harness.throw
  */
 const handle = (message) => {
-  const doc = `<!DOCTYPE html>
+  const content = `<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
@@ -127,7 +201,7 @@ ${css}
 </head>
 <body>
 <h1>Evaluation Results</h1>
-${table(VIOLATIONS)}
+${doc()}
 </body>
 </html>
 `;
@@ -135,7 +209,7 @@ ${table(VIOLATIONS)}
     mkdir(HARNESS.save);
     FS.writeFile(
       HARNESS.save,
-      doc,
+      content,
       { encoding: 'utf8' },
       noop
     );
@@ -329,7 +403,7 @@ ${css}
 </head>
 <body>
 <h1>Evaluation Results</h1>
-${table()}
+${doc()}
 </body>
 </html>
 `;
@@ -462,75 +536,7 @@ exports.prettyPrintHtml = prettyPrintHtml;
  * @returns {String}
  * @description Returns HTML table markup for the VIOLATIONS array
  */
-const table = () => `
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Rule</th>
-      <th scope="col">Impact</th>
-    </tr>
-  </thead>
-  <tbody>${VIOLATIONS.map((rule) => {
-    const { any = [], all = [] } = rule.nodes.pop() || {};
-
-    return `
-    <tr>
-      <td>
-        <a target="_blank" href="${rule.helpUrl}">
-          ${rule.help.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-        </a>
-
-        <div>${any && any.length > 0 ? `
-          <p>
-            <em>Fix any of the following</em>
-          </p>
-          <ul>${any.map((failure) => `
-            <li>
-              ${failure.message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-              ${failure.relatedNodes.length > 0 ? `
-              <div>
-                <em>Related Nodes</em>:
-                <ul>${failure.relatedNodes.map((node) => `
-                  <li>
-                    ${node.target.join(' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-                  </li>`).join('')}
-                </ul>
-              </div>` : ''}
-            </li>`).join('')}
-          </ul>` : ''}
-          ${all && all.length > 0 ? `
-          <p>
-            <em>Fix all of the following</em>
-          </p>
-          <ul>${all.map((failure) => `
-            <li>
-              ${failure.message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-              ${failure.relatedNodes.length > 0 ? `
-              <div>
-                <em>Related Nodes</em>:
-                <ul>${failure.relatedNodes.map((node) => `
-                  <li>
-                    ${node.target.join(' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-                  </li>`).join('')}
-                </ul>
-              </div>` : ''}
-            </li>`).join('')}
-          </ul>` : ''}
-        </div>
-      </td>
-      <td class="impact">
-        <span class="flex">
-          <span aria-hidden="true" class="icon">
-            ${icons[rule.impact]}
-          </span>
-          <span>${rule.impact}</span>
-        </span>
-      </td>
-    </tr>`;
-  }).join('')}
-  </tbody>
-</table>`;
-exports.table = table;
+exports.table = doc;
 
 /**
  * @name target
