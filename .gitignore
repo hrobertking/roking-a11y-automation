@@ -1,7 +1,7 @@
 /node_modules
+.idea
 /build
 package-lock.json
 npm-debug.log
 examples/__screenshot
 examples/__results
-

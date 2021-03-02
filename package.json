@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "description": "An automation assistant that runs axe-core after interactions to ensure accessibility errors are not hidden.",
   "author": "H Robert King <hrobertking@gmail.com>",
+  "main": "build/puppeteer.js",
   "license": "GPL",
   "repository": {
     "type": "git",
     "url": "https://github.com/hrobertking/roking-auto-a11y.git"
   },
   "scripts": {
+    "build": "babel src --out-dir build --copy-files",
     "lint": "eslint . --ext .js --ignore-path .gitignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +21,8 @@
     "puppeteer-core": "^5.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.8.1",
     "eslint-plugin-import": "^2.22.1"
