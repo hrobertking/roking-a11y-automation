@@ -1,6 +1,6 @@
-# roking-auto-a11y
+# roking-a11y-automation
 
-The **roking-auto-a11y** module combines **puppeteer** and the aXe accessibility testing engine, **axe-core**, to test accessibility after page interactions. This addresses the hidden issue in accessibility testing where dynamic content behind interactions, such as accordions, dialog boxes, tooltips, and menus, is left unevaluated.
+The **roking-a11y-automation** module combines **puppeteer** and the aXe accessibility testing engine, **axe-core**, to test accessibility after page interactions. This addresses the hidden issue in accessibility testing where dynamic content behind interactions, such as accordions, dialog boxes, tooltips, and menus, is left unevaluated.
 
 In order to use this, a test must be written that will perform the interactions on a page. An example of such a test is available in the _click_ test in the examples collection.
 
@@ -20,14 +20,17 @@ In order to use this, a test must be written that will perform the interactions 
 In order to run examples, the URLs to be tested, in each example, must point to a
 running web server instance. Examples are using `http://localhost:4000` by default. 
 
-1. **[click](examples/click.js)**: demonstrates how to target elements, call interactions, and output results. `node example/click.js`
-2. **[console](examples/console.js)**: demonstrates how to report the analysis to avoid stopping tests. `node example/console.js`
-3. **[html](examples/html.js)**: demonstrates how to get accessibility results as an HTML document. `node example/html.js`
-3. **[save](examples/save.js)**: demonstrates how to save accessibility results to a file. `node example/save.js`
-4. **[simple](examples/simple.js)**: demonstrates how to run a simple analysis. `node example/simple.js`
-5. **[target](examples/target.js)**: demonstrates how to exclude elements from accessibility analysis. `node example/target.js`
-6. **[throws](examples/throws.js)**: demonstrates how to integrate analysis with testing to fail tests by throwing an error. `node example/throws.js`
-7. **[verbose](examples/verbose.js)**: demonstrates how to output verbose violations returned by axe.analyze. `node example/verbose.js`
+1. **[blur](examples/blur.js)**: demonstrates how to target elements, call interactions, and output results. `node example/blur.js`
+2. **[click](examples/click.js)**: demonstrates how to target elements, call interactions, and output results. `node example/click.js`
+3. **[console](examples/console.js)**: demonstrates how to report the analysis to avoid stopping tests. `node example/console.js`
+4. **[global](examples/global.js)**: demonstrates how to chain multiple interactions on a single page. `node examples/global.js`
+5. **[html](examples/html.js)**: demonstrates how to get accessibility results as an HTML document. `node example/html.js`
+6. **[save](examples/save.js)**: demonstrates how to save accessibility results to a file. `node example/save.js`
+7. **[simple](examples/simple.js)**: demonstrates how to run a simple analysis. `node example/simple.js`
+8. **[snapshot](examples/snapshot.js)**: demonstrates the use of the `snapshot` method to generate snapshots. `node example/snapshot.js`
+9. **[target](examples/target.js)**: demonstrates how to exclude elements from accessibility analysis. `node example/target.js`
+10. **[throws](examples/throws.js)**: demonstrates how to integrate analysis with testing to fail tests by throwing an error. `node example/throws.js`
+11. **[verbose](examples/verbose.js)**: demonstrates how to output verbose violations returned by axe.analyze. `node example/verbose.js`
 
 ### Output
 There are three output modes, with multiple possible destinations. The _default_ mode provides the name of the test that has failed, e.g., "Elements must have sufficient color contrast", the impact of the rule, i.e., MINOR, MODERATE, SERIOUS, or CRITICAL, and the element or elements failing the test. The _quiet_ mode suppresses the list of elements violating the rule, and the _verbose_ mode provides all information available in the axe violations array.
